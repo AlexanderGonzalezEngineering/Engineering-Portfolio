@@ -1,42 +1,41 @@
-# Alex Gonzalez / Engineering Project Portfolio
+# Alex Gonzalez / Damascus Portfolio — True Gold Sweep V2
 
-A clean, editable, static portfolio website inspired by the approved
-charcoal-and-gold Damascus-steel visual reference.
+## What this fixes
+The earlier sweep was hidden by an `::before` pseudo-element using
+`z-index: -1`. The text still changed color, creating an abrupt golden
+flash instead of a left-to-right animation.
 
-## Website pages
-- `index.html` — hero, three navigation cards, and project gallery
-- `about.html` — "Who I Am" page
-- `future.html` — reserved third page
-- `project.html` — reusable brochure-style project page for future projects
+The replacement renders the bar as a real CSS background image and
+animates its visible width from `0%` to `100%` over 650 milliseconds.
+At the same time the entire menu item grows uniformly to 108% around
+its center. Both effects reverse as the pointer leaves.
 
-## Source files
-- `style.css` — colors, layout, Damascus background, animations
-- `script.js` — navigation, project cards, and brochure rendering
-- `projects.js` — **empty** until your projects are ready
-- `assets/damascus-texture.webp` — actual Damascus-inspired background texture
-- `assets/design-reference.webp` — approved visual reference for comparison
+The same behavior applies to navigation links, buttons, the homepage
+section cards, and future project tiles. The mobile menu opens with
+an animated slide/fade, and keyboard focus triggers the same visual.
+Reduced-motion accessibility settings are supported.
 
-## Editing
-1. Edit the colors at the very top of `style.css`.
-2. Replace `you@example.com` in the HTML files with your email.
-3. Update the biography in `about.html`.
-4. Add real projects to `projects.js` when ready.
-5. To swap the Damascus background, replace `assets/damascus-texture.webp`.
+## Fastest update for your published site
+Use the **CSS-only ZIP**. Extract `style.css` and replace the file in
+GitHub repository root (next to `index.html`). Commit the replacement.
+Wait for deployment, then do Ctrl+Shift+R in the browser.
 
-## Publish with GitHub Pages
-1. Extract this ZIP.
-2. Upload all files and the `assets` folder to your repository root.
-3. Go to Settings → Pages and publish the `main` branch from `/ (root)`.
-4. Wait for deployment, then refresh your website.
+The high-resolution Damascus background is still embedded in `style.css`,
+so no image upload is needed. All other website files can stay unchanged.
 
-No dependencies, build tools, or frameworks required.
+## Complete archive
+If you want the entire editable site, the complete ZIP contains all HTML,
+JS, CSS and background assets. Upload the extracted *contents*, preserving
+the folder structure—not the ZIP itself.
 
-## Damascus background visibility fix
+## Edit the animation
+At the END of `style.css`, find `TRUE MATTE-GOLD SWEEP + CENTERED SCALE`.
+The duration, gold colors and scale percentages are documented as CSS
+variables. No JavaScript is necessary for desktop hover animations.
 
-The texture is now embedded directly inside `style.css` as a data URL.
-This means it will appear even if the `assets/` folder was uploaded
-incorrectly. The original image is still included in `assets/`.
-
-To update an existing GitHub Pages website, replace `style.css`.
-For the complete website, upload the entire contents of this ZIP.
-After deployment, hard-refresh with Ctrl + Shift + R.
+## Unchanged
+- Alex Gonzalez branding
+- The high-resolution Damascus image
+- Who I Am, More, and project brochure pages
+- Project data remains empty until you add projects
+- Generic `you@example.com` email placeholder remains unchanged
