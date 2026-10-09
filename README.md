@@ -30,3 +30,13 @@ charcoal-and-gold Damascus-steel visual reference.
 4. Wait for deployment, then refresh your website.
 
 No dependencies, build tools, or frameworks required.
+
+## Damascus background visibility fix
+
+The texture is now embedded directly inside `style.css` as a data URL.
+This means it will appear even if the `assets/` folder was uploaded
+incorrectly. The original image is still included in `assets/`.
+
+To update an existing GitHub Pages website, replace `style.css`.
+For the complete website, upload the entire contents of this ZIP.
+After deployment, hard-refresh with Ctrl + Shift + R.
