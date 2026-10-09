@@ -154,14 +154,26 @@ if (
 }
 
 
-/* Scroll indicator: fixed in the viewport so it follows as the page
-   moves underneath it. Fade it out after the user has scrolled most
-   of a screen; bring it back when they return near the top. */
+/* Scroll indicator: stay at the right edge of the viewport while the
+   visitor moves down the page, then fade away. Using the actual page
+   length keeps the threshold reachable on tall screens / short pages. */
 const scrollCue = document.querySelector(".scroll-cue");
 
 if (scrollCue) {
     const updateScrollCue = () => {
-        const fadeThreshold = Math.max(420, Math.round(window.innerHeight * 0.8));
+        const maximumScroll = Math.max(
+            0,
+            document.documentElement.scrollHeight - window.innerHeight
+        );
+        const preferredThreshold = Math.max(
+            180,
+            Math.round(window.innerHeight * 0.34)
+        );
+        const fadeThreshold = Math.min(
+            preferredThreshold,
+            maximumScroll * 0.65
+        );
+
         scrollCue.classList.toggle("is-hidden", window.scrollY > fadeThreshold);
     };
 
