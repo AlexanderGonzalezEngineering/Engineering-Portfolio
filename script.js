@@ -154,15 +154,18 @@ if (
 }
 
 
-/* Scroll indicator: idle pulse is handled by CSS. The cue fades out
-   when the visitor scrolls down, then returns near the top. */
+/* Scroll indicator: fixed in the viewport so it follows as the page
+   moves underneath it. Fade it out after the user has scrolled most
+   of a screen; bring it back when they return near the top. */
 const scrollCue = document.querySelector(".scroll-cue");
 
 if (scrollCue) {
     const updateScrollCue = () => {
-        scrollCue.classList.toggle("is-hidden", window.scrollY > 160);
+        const fadeThreshold = Math.max(420, Math.round(window.innerHeight * 0.8));
+        scrollCue.classList.toggle("is-hidden", window.scrollY > fadeThreshold);
     };
 
     window.addEventListener("scroll", updateScrollCue, { passive: true });
+    window.addEventListener("resize", updateScrollCue, { passive: true });
     updateScrollCue();
 }

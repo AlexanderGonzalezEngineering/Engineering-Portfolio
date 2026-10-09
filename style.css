@@ -271,7 +271,7 @@ body > * {
 }
 
 .scroll-cue {
-    position: absolute;
+    position: fixed;
     bottom: 26px;
     right: max(32px, calc((100vw - var(--content-width)) / 2));
     color: var(--gold);
@@ -649,7 +649,6 @@ body > * {
 .section-card,
 .project-tile,
 .footer-link,
-.scroll-cue,
 .menu-toggle {
     position: relative;
     transform: scale(1);
@@ -676,7 +675,6 @@ body > * {
 .nav-link:is(:hover, :focus-visible),
 .sweep-link:is(:hover, :focus-visible),
 .footer-link:is(:hover, :focus-visible),
-.scroll-cue:is(:hover, :focus-visible),
 .menu-toggle:is(:hover, :focus-visible) {
     background-size: 100% 100%;
     transform: scale(var(--menu-hover-scale));
@@ -696,7 +694,6 @@ body > * {
    Wait for the sweep to travel most of the way before darkening text. */
 .nav-link:is(:hover, :focus-visible),
 .footer-link:is(:hover, :focus-visible),
-.scroll-cue:is(:hover, :focus-visible),
 .outline-button:is(:hover, :focus-visible) {
     color: var(--sweep-on-gold);
     transition:
@@ -749,12 +746,6 @@ body > * {
 
 .brand > span {
     transition: color 180ms ease;
-}
-
-/* The scroll cue arrow remains visible against the completed gold fill. */
-.scroll-cue:is(:hover, :focus-visible) span {
-    color: var(--sweep-on-gold);
-    transition: color 175ms ease 270ms;
 }
 
 /* Mobile hamburger: gold sweeps beneath the three strokes.
@@ -872,18 +863,29 @@ body > * {
     display: none;
 }
 
-/* The cue's OUTER link fades away on scroll; its INNER content pulses.
-   Separate elements prevent pulse animation from overriding hide state. */
+/* The SCROLL cue follows the user's viewport (position: fixed above).
+   It is excluded from gold-fill menu styles on purpose.
+   A separate transform creates uniform, centered hover enlargement.
+   The inner element pulses while the outer link handles scroll fading. */
 .scroll-cue {
+    z-index: 8;
     opacity: 1;
     visibility: visible;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    background: none;
+    background-size: auto;
+    color: var(--gold);
     transition:
         opacity 340ms ease,
         visibility 340ms ease,
-        background-size var(--sweep-duration) var(--sweep-fill-ease),
-        transform var(--sweep-duration) var(--sweep-ease),
-        color 175ms ease,
-        border-color 300ms ease;
+        transform var(--sweep-duration) var(--sweep-ease);
+}
+
+.scroll-cue:is(:hover, :focus-visible) {
+    transform: scale(var(--menu-hover-scale));
+    background: none;
+    color: var(--gold);
 }
 
 .scroll-cue-pulse {
