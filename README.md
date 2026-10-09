@@ -1,35 +1,26 @@
-# Engineering Portfolio — Charcoal + Gold
+# Alex Gonzalez / Engineering — Portfolio
 
-This is a static website for GitHub Pages. No build tools are required.
+A static GitHub Pages website with charcoal-grey background, matte-gold
+accents, topographic contour lines, and interactive side-sweep hover effects.
 
-## Pages
-- `index.html` — homepage and Projects grid
-- `project.html` — brochure-style project overview (generated from `projects.js`)
-- `about.html` — My Background introduction page
-- `future.html` — reserved third page
-- `style.css` — all colors, fonts, layout, and responsive styling
-- `projects.js` — edit the sample projects here
-- `script.js` — renders project cards, project pages, and mobile navigation
-- `assets/` — project illustrations and images
+## Main pages
+- `index.html` — homepage, Projects section, Who I Am preview
+- `about.html` — personal background and introduction
+- `future.html` — third page reserved for later
+- `project.html` — reusable project brochure template (no projects published yet)
 
-## Changing colors
-At the top of `style.css`, change:
-- `--bg` for charcoal background (`#242424`)
-- `--accent` for matte gold (`#e5a83b`)
-- `--text` for readable light body text
+## Files to edit
+- `style.css` — colors, background, animation, and layout
+- `assets/topographic-lines.svg` — grey/gold contour pattern
+- `projects.js` — currently empty; add projects here later
+- `script.js` — project rendering and navigation
 
-## Editing your projects
-Open `projects.js`. Each project has a `slug`, `title`, `subtitle`,
-`image`, `overview`, `challenge`, `approach`, and `results`.
-Replace the sample text and SVG illustrations with your own real work.
-Project cards link to `project.html?slug=...` automatically.
+## Publishing
+Extract this ZIP, upload all the contents (including `assets/`) to the root
+of your GitHub Pages repository, and commit the changes.
 
-## Editing your background
-Open `about.html` and replace the placeholder paragraphs.
-
-## Publishing on GitHub Pages
-Upload all files and the `assets` folder into your GitHub Pages repository.
-In Settings > Pages, choose Deploy from a branch, `main`, `/ (root)`.
-Your site should be at https://YOURUSERNAME.github.io.
-
-All source files are deliberately separated and editable.
+## Important placeholders
+- Replace the generic About page text with your actual biography.
+- Replace `you@example.com` with your email when ready.
+- Update the GitHub navigation link to your GitHub profile.
+- There are deliberately no fictional/sample project cards.

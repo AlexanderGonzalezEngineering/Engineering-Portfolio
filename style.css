@@ -619,3 +619,166 @@ h3,
     gap: 16px;
     margin-top: 36px;
 }
+
+
+/* ================================================================
+   ALEX GONZALEZ — CHARCOAL / MATTE GOLD VISUAL SYSTEM
+   ================================================================
+   Theme colors: change these values to customize the website.
+*/
+:root {
+    --bg: #242424;
+    --panel: #303030;
+    --line: #4c4943;
+    --text: #f3eee2;
+    --muted: #c0b8a9;
+    --accent: #e5a83b;
+}
+
+/* Topographic / Damascus-inspired lines behind every page.
+   The SVG is editable at assets/topographic-lines.svg. */
+body {
+    background-color: var(--bg);
+    background-image:
+        linear-gradient(90deg, rgba(36, 36, 36, .70), rgba(36, 36, 36, .48)),
+        url("assets/topographic-lines.svg");
+    background-size: auto, 1600px 900px;
+    background-position: center top;
+    background-attachment: fixed;
+}
+
+.site-header {
+    background: rgba(36, 36, 36, .96);
+}
+
+.about-band,
+.content-panel,
+.project-card,
+.empty-projects {
+    background-color: rgba(48, 48, 48, .94);
+}
+
+.wordmark {
+    color: var(--accent);
+    font-size: clamp(12px, 1.3vw, 17px);
+    letter-spacing: .01em;
+    white-space: nowrap;
+}
+
+/* Gold sweep travels left to right on all interactive links/buttons.
+   Uses a pseudo-element so text stays crisp and readable. */
+a,
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.site-header nav a,
+.button,
+.filter,
+.footer a,
+.page-links a,
+.menu-toggle,
+.project-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+        color .3s ease,
+        border-color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.site-header nav a::before,
+.button::before,
+.filter::before,
+.footer a::before,
+.page-links a::before,
+.menu-toggle::before,
+.project-card::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(229, 168, 59, .28), rgba(229, 168, 59, .12));
+    transform: translateX(-105%);
+    transition: transform .42s cubic-bezier(.2, .8, .2, 1);
+    pointer-events: none;
+}
+
+.site-header nav a:hover::before,
+.site-header nav a:focus-visible::before,
+.button:hover::before,
+.button:focus-visible::before,
+.filter:hover::before,
+.filter:focus-visible::before,
+.footer a:hover::before,
+.footer a:focus-visible::before,
+.page-links a:hover::before,
+.page-links a:focus-visible::before,
+.menu-toggle:hover::before,
+.menu-toggle:focus-visible::before,
+.project-card:hover::before,
+.project-card:focus-visible::before {
+    transform: translateX(0);
+}
+
+.site-header nav a {
+    padding: 12px 8px;
+    border-radius: 4px;
+}
+
+.button:hover,
+.project-card:hover {
+    transform: translateY(-2px);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.empty-projects {
+    grid-column: 1 / -1;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: clamp(36px, 6vw, 75px);
+}
+
+.empty-projects h3 {
+    color: var(--accent);
+    font-size: clamp(28px, 4vw, 46px);
+    margin: 16px 0;
+}
+
+.empty-projects p {
+    max-width: 560px;
+    line-height: 1.7;
+    color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-header nav a,
+    .button,
+    .filter,
+    .footer a,
+    .page-links a,
+    .menu-toggle,
+    .project-card,
+    .site-header nav a::before,
+    .button::before,
+    .filter::before,
+    .footer a::before,
+    .page-links a::before,
+    .menu-toggle::before,
+    .project-card::before {
+        transition: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .wordmark {
+        font-size: 12px;
+    }
+}

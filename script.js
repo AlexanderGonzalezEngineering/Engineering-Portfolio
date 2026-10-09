@@ -33,7 +33,11 @@ if (grid) {
         );
 
         grid.innerHTML = shown.map(card).join('') ||
-            '<p>No projects in this category yet.</p>';
+            `<div class="empty-projects">
+                <span class="section-kicker">PROJECT LIBRARY / COMING SOON</span>
+                <h3>Projects coming soon<span class="period">.</span></h3>
+                <p>Alex's engineering projects will be published here with a dedicated overview for each.</p>
+            </div>`;
     }
 
     render();
@@ -65,7 +69,7 @@ if (detail) {
             <p><a href="index.html#work">Return to projects →</a></p>
         `;
     } else {
-        document.title = `${project.title} | Engineering Portfolio`;
+        document.title = `${project.title} | Alex Gonzalez Engineering`;
 
         const tags = project.tags.map(tag => `<span>${tag}</span>`).join('');
         const processItems = project.approach.map(item => `<li>${item}</li>`).join('');

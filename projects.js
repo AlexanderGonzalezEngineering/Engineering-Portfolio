@@ -1,51 +1,29 @@
-// Replace the sample projects below with your real work.
-// Put images in assets/ and update each project's image field.
-window.PORTFOLIO_PROJECTS = [
-    {
-        slug:'thermal-system',
-        number:'01',
-        title:'Thermal System Design',
-        category:'Mechanical',
-        year:'2026',
-        subtitle:'From energy requirements to a testable mechanical concept.',
-        image:'assets/project-thermal.svg',
-        tags:['Mechanical Design','Thermal Analysis','Prototyping'],
-        overview:'An example case study showing how to present a thermal-mechanical design project. Replace this with the actual problem, context, and engineering goal.',
-        challenge:'Define operating requirements, balance thermal performance against packaging constraints, and identify a practical method of validation.',
-        approach:['Define measurable performance targets and constraints.','Create initial CAD layouts and compare design alternatives.','Estimate heat transfer and energy requirements.','Build a prototype and compare measured results with calculations.'],
-        results:['Document the final geometry and design rationale.','Report test data and the differences from predicted performance.','Identify the next engineering iteration.'],
-        tools:'CAD software, spreadsheet calculations, temperature measurement'
-    },
+// ================================================================
+// ALEX GONZALEZ — PROJECTS
+// ================================================================
+// Your project list is intentionally empty for now.
+// When you're ready, we can add real engineering projects here.
+// Each project will automatically appear on the homepage and link
+// to its own brochure-style page via project.html?slug=...
+//
+// Example structure (commented out, NOT displayed):
+//
+// window.PORTFOLIO_PROJECTS = [
+//     {
+//         slug: "my-first-project",
+//         number: "01",
+//         title: "Project Title",
+//         category: "Mechanical",
+//         year: "2026",
+//         subtitle: "A short one-sentence summary.",
+//         image: "assets/my-project-image.jpg",
+//         tags: ["CAD", "Design"],
+//         overview: "Describe the project at a glance.",
+//         challenge: "What problem did it solve?",
+//         approach: ["Step one", "Step two"],
+//         results: ["Outcome one", "Outcome two"],
+//         tools: "CAD, prototyping, analysis"
+//     }
+// ];
 
-    {
-        slug:'aerodynamic-study',
-        number:'02',
-        title:'Aerodynamic Concept Study',
-        category:'Simulation',
-        year:'2026',
-        subtitle:'Geometry exploration supported by computational analysis.',
-        image:'assets/project-aero.svg',
-        tags:['CFD','Aerodynamics','Design Iteration'],
-        overview:'An example aerodynamic analysis case study. Use this section to describe the objective, assumptions, geometry, boundary conditions, and conclusions.',
-        challenge:'Understand how geometric changes affect flow behavior while keeping comparisons consistent.',
-        approach:['Establish a baseline geometry and reference conditions.','Create controlled design variants.','Run mesh sensitivity and compare force coefficients.','Review flow fields and explain the trade-offs.'],
-        results:['Present drag or downforce results with units and conditions.','Include pressure and velocity visualizations.','State simulation limitations and next validation steps.'],
-        tools:'CAD, CFD solver, post-processing'
-    },
-
-    {
-        slug:'precision-mechanism',
-        number:'03',
-        title:'Precision Mechanism Prototype',
-        category:'Prototyping',
-        year:'2025',
-        subtitle:'A compact assembly developed through rapid iteration.',
-        image:'assets/project-mechanism.svg',
-        tags:['CAD','3D Printing','Mechanisms'],
-        overview:'An example prototype project page. Replace the placeholders with photos of your physical builds and the measured outcomes.',
-        challenge:'Design a compact mechanism that is easy to assemble, repeatable, and suitable for fabrication.',
-        approach:['Translate functional needs into dimensional requirements.','Model the assembly and check clearances and interference.','Fabricate prototypes and assess fit and motion.','Revise tolerances and document the assembly.'],
-        results:['Show early and final prototype photographs.','Summarize fit, function, and durability testing.','Describe changes made after testing.'],
-        tools:'CAD, 3D printing, calipers, test fixtures'
-    }
-];
+window.PORTFOLIO_PROJECTS = [];
