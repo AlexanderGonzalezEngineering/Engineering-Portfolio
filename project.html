@@ -1,52 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="Engineering project case study." name="description"/>
-  <title>
-   Project | Engineering Portfolio
-  </title>
-  <link href="style.css" rel="stylesheet"/>
- </head>
- <body>
-  <header class="site-header">
-   <a class="wordmark" href="index.html">
-    Alex Gonzalez
-    <span class="mark">
-     /
-    </span>
-    ENGINEERING
-   </a>
-   <nav>
-    <a href="index.html#work">
-     &larr; All projects
-    </a>
-    <a href="about.html">
-     About
-    </a>
-    <a href="future.html">
-     Contact
-    </a>
-   </nav>
-  </header>
-  <main class="container detail" id="project-detail">
-  </main>
-  <footer class="footer container">
-   <span>
-    &copy;
-    <span id="year">
-    </span>
-    ALEX GONZALEZ
-   </span>
-   <a href="index.html#work">
-    ALL PROJECTS &uarr;
-   </a>
-  </footer>
-  <script src="projects.js">
-  </script>
-  <script src="script.js">
-  </script>
- </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project Overview / Alex Gonzalez</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container nav-row">
+            <a class="brand sweep-link" href="index.html"><span>Alex Gonzalez</span><span class="brand-slash"> / </span><span class="brand-muted">Engineering</span></a>
+            <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#projects">Projects</a>
+                <a class="nav-link" href="about.html">Who I Am</a>
+                <a class="nav-link" href="future.html">More</a>
+                <a class="nav-link nav-contact" href="mailto:you@example.com">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <main class="inner-hero damascus-surface">
+        <div class="container inner-content" id="project-detail">
+            <p class="eyebrow">Project Overview</p>
+            <h1>Project Not Found<span class="gold">.</span></h1>
+            <p class="inner-lead">Projects will be added here soon.</p>
+            <a class="outline-button sweep-link" href="index.html#projects">← Back to Projects</a>
+        </div>
+    </main>
+    <footer class="site-footer container">
+        <span>© <span id="year"></span> Alex Gonzalez</span>
+        <span>Engineering Project Portfolio</span>
+        <a class="footer-link" href="index.html">Home ↑</a>
+    </footer>
+    <script src="projects.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
-

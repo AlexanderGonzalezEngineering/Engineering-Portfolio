@@ -1,144 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="Alex Gonzalez's engineering project portfolio." name="description"/>
-  <title>
-   Alex Gonzalez | Engineering Project Portfolio
-  </title>
-  <link href="style.css" rel="stylesheet"/>
- </head>
- <body>
-  <header class="site-header">
-   <a class="wordmark" href="index.html">
-    Alex Gonzalez
-    <span class="mark">
-     /
-    </span>
-    ENGINEERING
-   </a>
-   <nav aria-label="Main navigation">
-    <a href="#work">
-     Projects
-    </a>
-    <a href="about.html">
-     About
-    </a>
-    <a href="future.html">
-     Contact
-    </a>
-    <a class="nav-github" href="https://github.com/" rel="noopener" target="_blank">
-     GitHub &nearrow;
-    </a>
-   </nav>
-   <button aria-expanded="false" aria-label="Toggle menu" class="menu-toggle">
-    ☰
-   </button>
-  </header>
-  <main>
-   <section class="hero container">
-    <div class="eyebrow">
-     <span class="live-dot">
-     </span>
-     ENGINEERING PROJECT PORTFOLIO
-     <span class="muted">
-      / 2026
-     </span>
-    </div>
-    <h1>
-     Ideas, engineered
-     <br/>
-     <em>
-      into reality.
-     </em>
-    </h1>
-    <p class="hero-copy">
-     I&rsquo;m
-     <strong>
-      Alex Gonzalez
-     </strong>
-     , an engineer focused on mechanical design, simulation, and building thoughtful solutions to real-world problems.
-    </p>
-    <div class="hero-actions">
-     <a class="button primary" href="#work">
-      Explore projects
-      <span>
-       &nearrow;
-      </span>
-     </a>
-     <a class="button secondary" href="about.html">
-      My Background &nearr;
-     </a>
-    </div>
-    <div class="hero-bottom">
-     <span>
-      CAD / PROTOTYPING / ANALYSIS
-     </span>
-     <span>
-      SCROLL TO EXPLORE &darr;
-     </span>
-    </div>
-   </section>
-   <section class="work container" id="work">
-    <div class="section-top">
-     <div>
-      <span class="section-kicker">
-       01 / PROJECTS
-      </span>
-      <h2>
-       Projects
-       <span class="period">
-        .
-       </span>
-      </h2>
-     </div>
-     <p>
-      Project overviews and technical case studies will appear here as they are added.
-     </p>
-    </div>
-    <div class="project-grid" id="project-grid">
-    </div>
-   </section>
-   <!-- THREE MAIN SECTIONS: Projects, My Background, Future -->
-   <section class="about-band" id="explore">
-    <div class="container about-grid">
-     <div>
-      <span class="section-kicker">02 / MY BACKGROUND</span>
-      <h2>Who I Am<span class="period">.</span></h2>
-     </div>
-     <div>
-      <p>Learn more about my interests, experience, engineering approach, and technical skills.</p>
-      <a class="button secondary" href="about.html">My background &nearr;</a>
-     </div>
-    </div>
-   </section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Engineering project portfolio of Alex Gonzalez.">
+    <title>Alex Gonzalez / Engineering Project Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container nav-row">
+            <a class="brand sweep-link" href="index.html" aria-label="Alex Gonzalez Engineering homepage">
+                <span>Alex Gonzalez</span><span class="brand-slash"> / </span><span class="brand-muted">Engineering</span>
+            </a>
 
-   <section class="contact container" id="future">
-    <span class="section-kicker">03 / COMING LATER</span>
-    <h2>What's next<span class="period">.</span></h2>
-    <p>A flexible third page reserved for future content.</p>
-    <a class="button secondary" href="future.html">Explore the third page &nearr;</a>
-   </section>
-  </main>
-  <footer class="footer container">
-   <span>
-    &copy;
-    <span id="year">
-    </span>
-    ALEX GONZALEZ
-   </span>
-   <span>
-    DESIGNED &amp; BUILT WITH INTENTION.
-   </span>
-   <a href="index.html">
-    BACK TO TOP &uarr;
-   </a>
-  </footer>
-  <script src="projects.js">
-  </script>
-  <script src="script.js">
-  </script>
- </body>
+            <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a class="nav-link active" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#projects">Projects</a>
+                <a class="nav-link" href="about.html">Who I Am</a>
+                <a class="nav-link" href="future.html">More</a>
+                <a class="nav-link nav-contact" href="mailto:you@example.com">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero damascus-surface" aria-labelledby="hero-title">
+            <div class="container hero-content">
+                <p class="eyebrow reveal">Engineering Project Portfolio</p>
+                <h1 id="hero-title" class="reveal">
+                    <span>Alex Gonzalez /</span>
+                    <span class="gold">Engineering</span>
+                </h1>
+                <p class="hero-descriptor reveal">Ideas <span>/</span> Design <span>/</span> Analysis <span>/</span> Prototype <span>/</span> Real-world solutions</p>
+                <a class="outline-button sweep-link reveal" href="#projects">View Projects <span aria-hidden="true">→</span></a>
+            </div>
+            <a class="scroll-cue" href="#explore">Scroll <span aria-hidden="true">↓</span></a>
+        </section>
+
+        <section class="sections container" id="explore" aria-label="Explore the portfolio">
+            <a class="section-card damascus-surface" href="#projects">
+                <span class="card-number">01</span>
+                <h2>Projects</h2>
+                <span class="card-arrow" aria-hidden="true">⟶</span>
+                <p>A collection of engineering projects, designs, and technical work.</p>
+            </a>
+            <a class="section-card damascus-surface" href="about.html">
+                <span class="card-number">02</span>
+                <h2>Who I Am</h2>
+                <span class="card-arrow" aria-hidden="true">⟶</span>
+                <p>My background, interests, and engineering focus.</p>
+            </a>
+            <a class="section-card damascus-surface" href="future.html">
+                <span class="card-number">03</span>
+                <h2>More</h2>
+                <span class="card-arrow" aria-hidden="true">⟶</span>
+                <p>A space for future content.</p>
+            </a>
+        </section>
+
+        <section class="project-section container" id="projects">
+            <div class="section-heading">
+                <p class="eyebrow">01 / Project Library</p>
+                <h2>Selected Projects<span class="gold">.</span></h2>
+                <p>Each project will have its own brochure-style overview, imagery, and technical highlights.</p>
+            </div>
+
+            <!-- No fictional project templates: real projects will appear here later. -->
+            <div id="project-grid" class="project-grid" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer container">
+        <span>© <span id="year"></span> Alex Gonzalez</span>
+        <span>Engineering Project Portfolio</span>
+        <a class="footer-link" href="#top">Back to top ↑</a>
+    </footer>
+
+    <script src="projects.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
-
