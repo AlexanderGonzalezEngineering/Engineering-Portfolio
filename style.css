@@ -634,7 +634,7 @@ body > * {
     --sweep-gold-dark: #796039;            /* Brushed edge of the bar */
     --sweep-gold-mid: #b18a50;             /* Main matte gold */
     --sweep-gold-bright: #c49c5a;          /* Subtle leading highlight */
-    --sweep-duration: 650ms;
+    --sweep-duration: 490ms;
     --sweep-ease: cubic-bezier(.45, 0, .55, 1);
     --sweep-fill-ease: linear;             /* Steady, visible left-to-right travel */
     --menu-hover-scale: 1.08;             /* 108%, entire link centered */
@@ -702,7 +702,7 @@ body > * {
     transition:
         background-size var(--sweep-duration) var(--sweep-fill-ease),
         transform var(--sweep-duration) var(--sweep-ease),
-        color 190ms ease 360ms,
+        color 175ms ease 270ms,
         border-color 300ms ease,
         box-shadow 300ms ease;
 }
@@ -730,7 +730,7 @@ body > * {
 .project-tile:is(:hover, :focus-visible) h3,
 .project-tile:is(:hover, :focus-visible) p {
     color: var(--sweep-on-gold);
-    transition: color 180ms ease 360ms;
+    transition: color 175ms ease 270ms;
 }
 
 /* An existing intro reveal keyframe controls transform of the CTA.
@@ -744,7 +744,7 @@ body > * {
    letters after the matte-gold fill reaches the right edge. */
 .brand:is(:hover, :focus-visible) > span {
     color: var(--sweep-on-gold);
-    transition: color 180ms ease 360ms;
+    transition: color 175ms ease 270ms;
 }
 
 .brand > span {
@@ -754,7 +754,7 @@ body > * {
 /* The scroll cue arrow remains visible against the completed gold fill. */
 .scroll-cue:is(:hover, :focus-visible) span {
     color: var(--sweep-on-gold);
-    transition: color 180ms ease 360ms;
+    transition: color 175ms ease 270ms;
 }
 
 /* Mobile hamburger: gold sweeps beneath the three strokes.
@@ -773,7 +773,7 @@ body > * {
 
 .menu-toggle:is(:hover, :focus-visible) span {
     background-color: var(--sweep-on-gold);
-    transition: background-color 180ms ease 360ms,
+    transition: background-color 175ms ease 270ms,
                 transform 400ms var(--sweep-ease), opacity 160ms ease;
 }
 
@@ -854,5 +854,201 @@ body > * {
         transition: none !important;
         animation: none !important;
         will-change: auto;
+    }
+}
+
+
+/* ================================================================
+   PORTFOLIO REFINEMENTS — CONTACT + SCROLL CUE, OCTOBER 2026
+   ================================================================
+   Gold fill duration: --sweep-duration (now 490ms, previously 650ms)
+   Menu scale remains centered and gradual as before.
+   Scroll cue fades once page is scrolled beyond 160px.
+   Reduced motion preference is respected below.
+   ================================================================ */
+
+/* Hide menu card numbering (also removed from the HTML). */
+.card-number {
+    display: none;
+}
+
+/* The cue's OUTER link fades away on scroll; its INNER content pulses.
+   Separate elements prevent pulse animation from overriding hide state. */
+.scroll-cue {
+    opacity: 1;
+    visibility: visible;
+    transition:
+        opacity 340ms ease,
+        visibility 340ms ease,
+        background-size var(--sweep-duration) var(--sweep-fill-ease),
+        transform var(--sweep-duration) var(--sweep-ease),
+        color 175ms ease,
+        border-color 300ms ease;
+}
+
+.scroll-cue-pulse {
+    display: block;
+    animation: scroll-cue-breathe 2s ease-in-out infinite;
+}
+
+.scroll-arrow {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+}
+
+@keyframes scroll-cue-breathe {
+    0%, 100% { opacity: .28; }
+    50% { opacity: 1; }
+}
+
+.scroll-cue:is(:hover, :focus-visible) .scroll-cue-pulse {
+    animation-play-state: paused;
+    opacity: 1;
+}
+
+.scroll-cue.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* CONTACT PAGE — readable, responsive two-panel layout. */
+.contact-page {
+    min-height: calc(100vh - 185px);
+}
+
+.contact-page .inner-content {
+    padding-block: clamp(58px, 7vw, 100px) 100px;
+}
+
+.contact-page h1 {
+    margin-bottom: 12px;
+}
+
+.contact-page .inner-lead {
+    margin-bottom: 0;
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+    gap: 22px;
+    margin-top: 42px;
+}
+
+.contact-panel {
+    min-width: 0;
+    background: rgba(13, 13, 13, .88);
+    border: 1px solid var(--line);
+    padding: clamp(24px, 3vw, 42px);
+}
+
+.contact-kicker {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.contact-panel h2 {
+    font-size: clamp(22px, 2.3vw, 32px);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    line-height: 1.25;
+    margin: 12px 0 29px;
+}
+
+.contact-detail {
+    padding: 18px 0;
+    border-top: 1px solid rgba(229, 168, 59, .24);
+}
+
+.contact-detail-label {
+    display: block;
+    color: var(--muted);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.contact-detail-link {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: clamp(16px, 1.55vw, 21px);
+    color: var(--cream);
+    border-bottom: 1px solid transparent;
+    transition: color 200ms ease, border-color 200ms ease;
+}
+
+.contact-detail-link:hover,
+.contact-detail-link:focus-visible {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+}
+
+.contact-hint,
+.availability-note {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 25px 0 0;
+}
+
+.availability-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid rgba(229, 168, 59, .24);
+    padding: 21px 0;
+}
+
+.availability-row h3 {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin: 0 0 5px;
+}
+
+.availability-row p {
+    font-size: 13px;
+    margin: 0;
+    color: var(--muted);
+}
+
+.availability-status {
+    color: #d4b47c;
+    font-size: 13px;
+    max-width: 160px;
+    text-align: right;
+    line-height: 1.45;
+}
+
+.contact-back {
+    margin-top: 34px;
+}
+
+@media (max-width: 800px) {
+    .contact-layout { grid-template-columns: 1fr; }
+    .availability-status { max-width: none; }
+}
+
+@media (max-width: 420px) {
+    .availability-row { align-items: flex-start; }
+    .availability-status { max-width: 140px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-cue-pulse {
+        animation: none !important;
+        opacity: 1 !important;
+    }
+    .scroll-cue {
+        transition: none !important;
     }
 }

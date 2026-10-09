@@ -152,3 +152,17 @@ if (
         element.classList.add("is-visible");
     });
 }
+
+
+/* Scroll indicator: idle pulse is handled by CSS. The cue fades out
+   when the visitor scrolls down, then returns near the top. */
+const scrollCue = document.querySelector(".scroll-cue");
+
+if (scrollCue) {
+    const updateScrollCue = () => {
+        scrollCue.classList.toggle("is-hidden", window.scrollY > 160);
+    };
+
+    window.addEventListener("scroll", updateScrollCue, { passive: true });
+    updateScrollCue();
+}
