@@ -1,41 +1,16 @@
-# Alex Gonzalez / Damascus Portfolio — True Gold Sweep V2
+# Alex Gonzalez Engineering Portfolio — Circular Scroll Indicator (v6)
 
-## What this fixes
-The earlier sweep was hidden by an `::before` pseudo-element using
-`z-index: -1`. The text still changed color, creating an abrupt golden
-flash instead of a left-to-right animation.
+## Change made
+Replaced the vertical SCROLL rail with the approved **thin gold circle / down arrow / horizontal SCROLL label** design. The circle softly pulses its outer glow while idle. The text and arrow do not blink, and there is no gold-sweep on this control.
 
-The replacement renders the bar as a real CSS background image and
-animates its visible width from `0%` to `100%` over 650 milliseconds.
-At the same time the entire menu item grows uniformly to 108% around
-its center. Both effects reverse as the pointer leaves.
+Kept the existing 108% centered hover enlargement, fixed viewport positioning, and existing fade-away-on-scroll behavior. All other pages and Damascus background are unchanged.
 
-The same behavior applies to navigation links, buttons, the homepage
-section cards, and future project tiles. The mobile menu opens with
-an animated slide/fade, and keyboard focus triggers the same visual.
-Reduced-motion accessibility settings are supported.
+## Install: choose one package
+**Update ZIP:** Upload all six files (index.html, about.html, contact.html, future.html, project.html, style.css) to the root of the `Engineering-Portfolio` GitHub repository, replacing the files with those names. HTML pages have a new CSS version query to avoid stale caching. `script.js` is unchanged.
 
-## Fastest update for your published site
-Use the **CSS-only ZIP**. Extract `style.css` and replace the file in
-GitHub repository root (next to `index.html`). Commit the replacement.
-Wait for deployment, then do Ctrl+Shift+R in the browser.
+**Complete ZIP:** Contains the entire source site and background assets, useful for backup or a fresh installation.
 
-The high-resolution Damascus background is still embedded in `style.css`,
-so no image upload is needed. All other website files can stay unchanged.
+After committing, wait for the GitHub Pages deployment and then press Ctrl+Shift+R on the live site.
 
-## Complete archive
-If you want the entire editable site, the complete ZIP contains all HTML,
-JS, CSS and background assets. Upload the extracted *contents*, preserving
-the folder structure—not the ZIP itself.
-
-## Edit the animation
-At the END of `style.css`, find `TRUE MATTE-GOLD SWEEP + CENTERED SCALE`.
-The duration, gold colors and scale percentages are documented as CSS
-variables. No JavaScript is necessary for desktop hover animations.
-
-## Unchanged
-- Alex Gonzalez branding
-- The high-resolution Damascus image
-- Who I Am, More, and project brochure pages
-- Project data remains empty until you add projects
-- Generic `you@example.com` email placeholder remains unchanged
+## Customize
+In `style.css`, edit `.scroll-cue` for position, `.scroll-cue-ring` for circle size or thickness, and `@keyframes scroll-circle-glow` for the pulse strength/speed. Scroll disappearance is handled in the unchanged `script.js`.

@@ -855,29 +855,39 @@ body > * {
     display: none;
 }
 
-/* RIGHT-EDGE SCROLL RAIL — fixed to the viewport, not the cards.
-   The slim vertical presentation creates a separate affordance on the
-   far-right edge at mid-height; it won't sit on top of the project menu.
-   There is NO matte-gold sweep on this control. Its hover scale is
-   uniform from its center, and the idle label/arrow gently pulse.
-   script.js hides the cue after the visitor scrolls down the page. */
+/* ================================================================
+   CIRCULAR SCROLL CONTROL — MINIMAL GOLD RING + ARROW + SCROLL LABEL
+   ================================================================
+   Same approved design as the reference image:
+   - A thin matte-gold circular outline
+   - A centered downward arrow
+   - Horizontal SCROLL lettering underneath
+   - Only the circle's outer glow pulses while idle (not its size)
+   - The complete control uniformly enlarges on hover
+   - It stays fixed near the far-right edge and fades on scrolling
+   - No gold-fill sweep, guide line, or vertical text
+   ================================================================ */
 .scroll-cue {
     position: fixed;
     z-index: 8;
-    top: 50%;
-    right: clamp(9px, 1.2vw, 24px);
+    top: 54%;
+    right: clamp(18px, 3vw, 52px);
     bottom: auto;
     left: auto;
-    display: inline-flex;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 18px 10px;
-    min-width: 39px;
-    border-left: 1px solid rgba(229, 168, 59, 0.48);
-    background: rgba(9, 9, 9, 0.52);
+    gap: 13px;
+    width: 102px;
+    padding: 8px 0;
+    border: 0;
+    background: none;
     background-image: none;
-    background-size: auto;
+    overflow: visible;
     color: var(--gold);
+    text-align: center;
+    text-decoration: none;
     opacity: 1;
     visibility: visible;
     transform: translateY(-50%) scale(1);
@@ -888,52 +898,92 @@ body > * {
         transform var(--sweep-duration) var(--sweep-ease);
 }
 
-.scroll-cue:is(:hover, :focus-visible) {
-    background: rgba(9, 9, 9, 0.52);
-    background-image: none;
-    transform: translateY(-50%) scale(var(--menu-hover-scale));
-    color: var(--gold);
+/* A dedicated circle ensures that ONLY the ring's glow pulses. */
+.scroll-cue-ring {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    border: 2px solid #c79a52;
+    border-radius: 50%;
+    background: rgba(8, 8, 8, .17);
+    box-shadow: 0 0 0 rgba(221, 165, 76, 0);
+    animation: scroll-circle-glow 2.65s ease-in-out infinite;
 }
 
-.scroll-cue-pulse {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    animation: scroll-cue-breathe 2s ease-in-out infinite;
+/* Crisp, lightly weighted drawn arrow instead of a font-dependent glyph. */
+.scroll-arrow {
+    width: 35px;
+    height: 35px;
+    fill: none;
+    stroke: #d7a052;
+    stroke-width: 2;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
 }
 
 .scroll-cue-label {
     display: block;
-    writing-mode: vertical-rl;
+    writing-mode: horizontal-tb;
     text-orientation: mixed;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .27em;
-    line-height: 1;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .33em;
+    line-height: 1.35;
+    text-transform: uppercase;
+    color: #d7a052;
+    padding-left: .33em; /* optical centering with letter-spacing */
 }
 
-.scroll-arrow {
-    display: block;
-    font-size: 22px;
-    line-height: 1;
-    text-align: center;
+/* Glow builds and recedes; the border never disappears. */
+@keyframes scroll-circle-glow {
+    0%, 100% {
+        box-shadow: 0 0 2px rgba(229, 168, 59, .06),
+                    0 0 7px rgba(229, 168, 59, .03);
+    }
+    50% {
+        box-shadow: 0 0 14px rgba(229, 168, 59, .68),
+                    0 0 28px rgba(229, 168, 59, .24);
+    }
 }
 
-@keyframes scroll-cue-breathe {
-    0%, 100% { opacity: .30; }
-    50% { opacity: 1; }
+/* Keep the approved gradual centered hover enlargement. */
+.scroll-cue:is(:hover, :focus-visible) {
+    background: none;
+    background-image: none;
+    color: var(--gold);
+    transform: translateY(-50%) scale(var(--menu-hover-scale));
 }
 
-.scroll-cue:is(:hover, :focus-visible) .scroll-cue-pulse {
-    animation-play-state: paused;
-    opacity: 1;
-}
-
+/* Existing JS adds this class once the visitor scrolls far enough. */
 .scroll-cue.is-hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .scroll-cue {
+        top: 54%;
+        right: 10px;
+        width: 78px;
+        gap: 9px;
+    }
+    .scroll-cue-ring {
+        width: 58px;
+        height: 58px;
+        border-width: 1.6px;
+    }
+    .scroll-arrow {
+        width: 28px;
+        height: 28px;
+    }
+    .scroll-cue-label {
+        font-size: 10px;
+        letter-spacing: .26em;
+        padding-left: .26em;
+    }
 }
 
 /* ABOUT ME — one dedicated section for background, upbringing and goals.
@@ -968,14 +1018,6 @@ body > * {
 }
 
 @media (max-width: 600px) {
-    .scroll-cue {
-        top: 55%;
-        right: 6px;
-        padding: 13px 7px;
-        min-width: 30px;
-    }
-    .scroll-cue-label { font-size: 10px; }
-    .scroll-arrow { font-size: 19px; }
     .story-panel { min-height: 270px; }
 }
 
@@ -1110,9 +1152,9 @@ body > * {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .scroll-cue-pulse {
+    .scroll-cue-ring {
         animation: none !important;
-        opacity: 1 !important;
+        box-shadow: none !important;
     }
     .scroll-cue {
         transition: none !important;
