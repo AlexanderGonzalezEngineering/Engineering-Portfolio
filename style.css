@@ -1195,3 +1195,33 @@ body > * {
         margin: 0 0.28em;
     }
 }
+
+
+/* ABOUT ME — separate future-content cards below the biography.
+   Edit each card's text in about.html when the content is ready. */
+.about-content-card {
+    max-width: 920px;
+    min-height: 168px;
+    margin: 22px 0 0;
+    padding: clamp(28px, 4vw, 48px) clamp(32px, 5vw, 66px);
+    border-left: 3px solid var(--gold);
+    background: linear-gradient(110deg, rgba(8, 8, 8, 0.90), rgba(16, 16, 16, 0.76));
+}
+
+.about-content-card h2 {
+    margin: 0 0 14px;
+    font-size: clamp(25px, 2.7vw, 36px);
+    line-height: 1.2;
+}
+
+.about-content-card .about-placeholder {
+    margin: 0;
+    max-width: 700px;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+/* Breathing room between the new About cards and the return link. */
+.about-content-card + .outline-button {
+    margin-top: 30px;
+}
