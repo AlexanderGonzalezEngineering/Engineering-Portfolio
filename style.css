@@ -729,15 +729,10 @@ body > * {
     opacity: 1;
 }
 
-/* The homepage brand has three colored spans: avoid low-contrast gold
-   letters after the matte-gold fill reaches the right edge. */
-.brand:is(:hover, :focus-visible) > span {
-    color: var(--sweep-on-gold);
-    transition: color 175ms ease 270ms;
-}
-
-.brand > span {
-    transition: color 180ms ease;
+/* The Alex Gonzalez wordmark is display text, not an interactive menu. */
+.brand {
+    cursor: default;
+    user-select: text;
 }
 
 /* Mobile hamburger: gold sweeps beneath the three strokes.
@@ -1159,4 +1154,15 @@ body > * {
     .scroll-cue {
         transition: none !important;
     }
+}
+
+/* BIOGRAPHY (v8): multiple readable paragraphs within the existing card. */
+.story-panel > p:not(.story-kicker) {
+    max-width: 760px;
+    margin: 0 0 1.4em;
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.85;
+}
+.story-panel > p:last-child {
+    margin-bottom: 0;
 }
