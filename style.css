@@ -154,41 +154,10 @@ body > * {
     font-size: 11px;
     letter-spacing: 0.19em;
     text-transform: uppercase;
-    transition: color 0.25s ease;
+    /* Hover text transitions are defined in the animation section. */
 }
 
-.nav-link::before,
-.sweep-link::before,
-.section-card::before,
-.project-tile::before,
-.footer-link::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(229, 168, 59, 0.22),
-        rgba(229, 168, 59, 0.09)
-    );
-    transform: translateX(-105%);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    pointer-events: none;
-}
-
-.nav-link:hover::before,
-.nav-link:focus-visible::before,
-.sweep-link:hover::before,
-.sweep-link:focus-visible::before,
-.section-card:hover::before,
-.section-card:focus-visible::before,
-.project-tile:hover::before,
-.project-tile:focus-visible::before,
-.footer-link:hover::before,
-.footer-link:focus-visible::before {
-    transform: translateX(0);
-}
+/* Interactive sweep styling is consolidated in the ANIMATION SYSTEM below. */
 
 .nav-link:hover,
 .nav-link.active {
@@ -334,13 +303,9 @@ body > * {
     flex-direction: column;
     align-items: flex-start;
     border: 1px solid var(--line);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    /* Hover transforms are defined once in the animation section. */
 }
 
-.section-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--gold);
-}
 
 .card-number {
     color: var(--gold);
@@ -416,12 +381,9 @@ body > * {
     background: rgba(20, 20, 20, 0.92);
     border: 1px solid var(--line);
     padding: 22px;
-    transition: transform 0.3s ease;
+    /* Hover transforms are defined once in the animation section. */
 }
 
-.project-tile:hover {
-    transform: translateY(-4px);
-}
 
 .project-tile img {
     width: 100%;
@@ -649,30 +611,39 @@ body > * {
 }
 
 
-/* ================================================================
-   ANIMATED MATTE-GOLD MENU SWEEP — OCTOBER 2026
-   ================================================================
+/* ==================================================================
+   TRUE MATTE-GOLD SWEEP + CENTERED SCALE — V2
+   ==================================================================
 
-   How it works:
-   1. A real gold layer starts at ZERO width on the LEFT.
-   2. On hover/focus the layer EXPANDS to the right with scaleX.
-   3. At the same time the WHOLE clickable element grows from its
-      CENTER with transform: scale(...). No edge-stretching/layout jump.
-   4. Both effects reverse smoothly when hover/focus ends.
+   Previous issue: a ::before overlay had z-index: -1, allowing it to
+   disappear behind each element's opaque background. The text changed
+   color anyway, making the interaction look instantaneous.
 
-   Edit these variables to control the animation globally.
-   ================================================================ */
+   Fix: animate a GOLD BACKGROUND LAYER directly. It is always rendered
+   BEHIND the text and ABOVE the element's original background-color.
+   At rest its width is 0%. Hover progressively increases it to 100%.
+   No pseudo-element stacking context, hidden overlay, JS, or hover jump.
+
+   The background and whole element's scale use smooth interpolated
+   transitions. The scale happens from the CENTER, never one edge.
+
+   Edit only these settings to tune the effect.
+   ================================================================== */
 
 :root {
-    --menu-sweep-gold: #b18a50;       /* Muted, brushed matte gold */
-    --menu-sweep-dark: #201b15;       /* Readable dark text on gold */
-    --menu-animation-time: 440ms;    /* Duration of complete sweep */
-    --menu-enlarge: 1.08;            /* Nav/regular links: +8%, centered */
-    --card-enlarge: 1.055;           /* Large cards: +5.5%, centered */
-    --menu-animation-easing: cubic-bezier(.22, .72, .22, 1);
+    --sweep-gold-dark: #796039;            /* Brushed edge of the bar */
+    --sweep-gold-mid: #b18a50;             /* Main matte gold */
+    --sweep-gold-bright: #c49c5a;          /* Subtle leading highlight */
+    --sweep-duration: 650ms;
+    --sweep-ease: cubic-bezier(.45, 0, .55, 1);
+    --sweep-fill-ease: linear;             /* Steady, visible left-to-right travel */
+    --menu-hover-scale: 1.08;             /* 108%, entire link centered */
+    --card-hover-scale: 1.035;            /* Cards slightly gentler */
+    --sweep-on-gold: #1b170f;             /* Dark text once gold arrives */
 }
 
-/* These are interactive navigation elements in the current site. */
+/* All links, buttons and cards share the same REAL moving fill.
+   background-size animates continuously from zero to full width. */
 .nav-link,
 .sweep-link,
 .section-card,
@@ -681,135 +652,113 @@ body > * {
 .scroll-cue,
 .menu-toggle {
     position: relative;
-    isolation: isolate;
     transform: scale(1);
-    transform-origin: center center;
+    transform-origin: 50% 50%;
+    background-image: linear-gradient(
+        95deg,
+        var(--sweep-gold-dark) 0%,
+        var(--sweep-gold-mid) 60%,
+        var(--sweep-gold-bright) 100%
+    );
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 0% 100%;
     transition:
-        transform var(--menu-animation-time) var(--menu-animation-easing),
-        color var(--menu-animation-time) ease,
-        border-color var(--menu-animation-time) ease,
-        box-shadow var(--menu-animation-time) ease;
+        background-size var(--sweep-duration) var(--sweep-fill-ease),
+        transform var(--sweep-duration) var(--sweep-ease),
+        color 190ms ease,
+        border-color 300ms ease,
+        box-shadow 300ms ease;
+    will-change: background-size, transform;
 }
 
-/* Don't enlarge every element identically: large cards would overlap
-   too much at 108%, so their WHOLE surface scales slightly less. */
-.section-card,
-.project-tile {
-    --local-scale: var(--card-enlarge);
-}
-
-.nav-link,
-.sweep-link,
-.footer-link,
-.scroll-cue,
-.menu-toggle {
-    --local-scale: var(--menu-enlarge);
-}
-
+/* Nav and card enlargement does NOT change layout width or push siblings. */
 .nav-link:is(:hover, :focus-visible),
 .sweep-link:is(:hover, :focus-visible),
-.section-card:is(:hover, :focus-visible),
-.project-tile:is(:hover, :focus-visible),
 .footer-link:is(:hover, :focus-visible),
 .scroll-cue:is(:hover, :focus-visible),
 .menu-toggle:is(:hover, :focus-visible) {
-    transform: scale(var(--local-scale));
-    z-index: 3;
-}
-
-/* Gold moves from LEFT TO RIGHT as an actual expanding layer.
-   This REPLACES the previous pale gradient that looked like a tint. */
-.nav-link::before,
-.sweep-link::before,
-.section-card::before,
-.project-tile::before,
-.footer-link::before,
-.scroll-cue::before,
-.menu-toggle::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    pointer-events: none;
-    background: var(--menu-sweep-gold);
-    opacity: 1;
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform var(--menu-animation-time) var(--menu-animation-easing);
-}
-
-.nav-link:is(:hover, :focus-visible)::before,
-.sweep-link:is(:hover, :focus-visible)::before,
-.section-card:is(:hover, :focus-visible)::before,
-.project-tile:is(:hover, :focus-visible)::before,
-.footer-link:is(:hover, :focus-visible)::before,
-.scroll-cue:is(:hover, :focus-visible)::before,
-.menu-toggle:is(:hover, :focus-visible)::before {
-    transform: scaleX(1);
-}
-
-/* Keep normal menu text legible when fully filled with matte gold. */
-.nav-link:is(:hover, :focus-visible),
-.footer-link:is(:hover, :focus-visible),
-.scroll-cue:is(:hover, :focus-visible),
-.outline-button:is(:hover, :focus-visible) {
-    color: var(--menu-sweep-dark);
-}
-
-.nav-link.active:is(:hover, :focus-visible) {
-    color: var(--menu-sweep-dark);
-}
-
-.nav-link,
-.footer-link,
-.scroll-cue {
-    overflow: hidden;
-}
-
-/* Protect brochure/project-card text legibility while the sweep moves. */
-.section-card::before,
-.project-tile::before {
-    background: linear-gradient(90deg, #725a38, #a08050);
-}
-
-.section-card:is(:hover, :focus-visible) h2,
-.section-card:is(:hover, :focus-visible) .card-number,
-.section-card:is(:hover, :focus-visible) .card-arrow,
-.project-tile:is(:hover, :focus-visible) h3 {
-    color: #fff1d7;
-}
-
-.section-card:is(:hover, :focus-visible) p,
-.project-tile:is(:hover, :focus-visible) p {
-    color: #f6e9d7;
+    background-size: 100% 100%;
+    transform: scale(var(--menu-hover-scale));
+    z-index: 5;
 }
 
 .section-card:is(:hover, :focus-visible),
 .project-tile:is(:hover, :focus-visible) {
-    border-color: #d6ad72;
-    box-shadow: 0 12px 35px rgba(0,0,0,.32);
+    background-size: 100% 100%;
+    transform: scale(var(--card-hover-scale));
+    z-index: 5;
+    border-color: var(--sweep-gold-bright);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .32);
 }
 
-/* The hero call-to-action has an entry animation with animation-fill-mode:
-   both. Its saved transform otherwise overrides hover scale indefinitely.
-   Disable that one entry animation so the interactive scale always works. */
-.outline-button.reveal {
-    animation: none;
-    opacity: 1;
+/* Keep labels readable while the gold fill is in motion.
+   Wait for the sweep to travel most of the way before darkening text. */
+.nav-link:is(:hover, :focus-visible),
+.footer-link:is(:hover, :focus-visible),
+.scroll-cue:is(:hover, :focus-visible),
+.outline-button:is(:hover, :focus-visible) {
+    color: var(--sweep-on-gold);
+    transition:
+        background-size var(--sweep-duration) var(--sweep-fill-ease),
+        transform var(--sweep-duration) var(--sweep-ease),
+        color 190ms ease 360ms,
+        border-color 300ms ease,
+        box-shadow 300ms ease;
 }
 
-/* Keep gold hover color changes gradual throughout the whole card. */
+/* The active nav item should also show its full gold fill. */
+.nav-link.active:is(:hover, :focus-visible) {
+    color: var(--sweep-on-gold);
+}
+
+/* Large cards sweep without relying on an invisible ::before layer.
+   A delayed text transition preserves contrast once filled. */
 .section-card h2,
 .section-card p,
 .section-card .card-arrow,
 .section-card .card-number,
 .project-tile h3,
 .project-tile p {
-    transition: color var(--menu-animation-time) ease;
+    transition: color 180ms ease;
 }
 
-/* Animated mobile-menu button: sweeping gold background and X icon. */
+.section-card:is(:hover, :focus-visible) h2,
+.section-card:is(:hover, :focus-visible) p,
+.section-card:is(:hover, :focus-visible) .card-arrow,
+.section-card:is(:hover, :focus-visible) .card-number,
+.project-tile:is(:hover, :focus-visible) h3,
+.project-tile:is(:hover, :focus-visible) p {
+    color: var(--sweep-on-gold);
+    transition: color 180ms ease 360ms;
+}
+
+/* An existing intro reveal keyframe controls transform of the CTA.
+   Turn it off for the interactive link, so CSS hover scaling wins. */
+.outline-button.reveal {
+    animation: none;
+    opacity: 1;
+}
+
+/* The homepage brand has three colored spans: avoid low-contrast gold
+   letters after the matte-gold fill reaches the right edge. */
+.brand:is(:hover, :focus-visible) > span {
+    color: var(--sweep-on-gold);
+    transition: color 180ms ease 360ms;
+}
+
+.brand > span {
+    transition: color 180ms ease;
+}
+
+/* The scroll cue arrow remains visible against the completed gold fill. */
+.scroll-cue:is(:hover, :focus-visible) span {
+    color: var(--sweep-on-gold);
+    transition: color 180ms ease 360ms;
+}
+
+/* Mobile hamburger: gold sweeps beneath the three strokes.
+   The strokes morph into an X when expanded. */
 .menu-toggle {
     overflow: hidden;
 }
@@ -817,13 +766,15 @@ body > * {
 .menu-toggle span {
     position: relative;
     transition:
-        transform var(--menu-animation-time) var(--menu-animation-easing),
-        opacity 220ms ease,
-        background-color var(--menu-animation-time) ease;
+        transform 400ms var(--sweep-ease),
+        opacity 160ms ease,
+        background-color 180ms ease;
 }
 
 .menu-toggle:is(:hover, :focus-visible) span {
-    background-color: #201b15;
+    background-color: var(--sweep-on-gold);
+    transition: background-color 180ms ease 360ms,
+                transform 400ms var(--sweep-ease), opacity 160ms ease;
 }
 
 .menu-toggle[aria-expanded="true"] span:nth-child(1) {
@@ -839,7 +790,8 @@ body > * {
     transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Mobile navigation opens with a slide and fade rather than popping in. */
+/* Mobile navigation: animate a real opening panel; don't toggle
+   display: none, because that cannot transition smoothly. */
 @media (max-width: 950px) {
     .main-nav {
         display: flex;
@@ -850,19 +802,19 @@ body > * {
         pointer-events: none;
         padding-top: 0;
         padding-bottom: 0;
-        transform: translateY(-16px);
+        transform: translateY(-12px);
         transform-origin: top center;
         transition:
-            max-height 460ms var(--menu-animation-easing),
-            opacity 340ms ease,
-            transform 460ms var(--menu-animation-easing),
-            padding 460ms var(--menu-animation-easing),
-            visibility 460ms;
+            max-height 440ms var(--sweep-ease),
+            opacity 330ms ease,
+            transform 440ms var(--sweep-ease),
+            padding 440ms var(--sweep-ease),
+            visibility 440ms;
     }
 
     .main-nav.is-open {
         display: flex;
-        max-height: 520px;
+        max-height: 560px;
         visibility: visible;
         opacity: 1;
         pointer-events: auto;
@@ -871,13 +823,18 @@ body > * {
         transform: translateY(0);
     }
 
-    .main-nav .nav-link {
-        transform-origin: center center;
+    /* Full-width mobile rows enlarge from their center, gently enough
+       that they don't get clipped by the edges of the screen. */
+    .main-nav .nav-link:is(:hover, :focus-visible) {
+        transform: scale(1.025);
+    }
+
+    .section-card:is(:hover, :focus-visible) {
+        transform: scale(1.02);
     }
 }
 
-/* Make the animation available to keyboard users, without forcing
-   animation on people who ask the OS to minimize motion. */
+/* Accessibility: no motion when the OS setting requests less motion. */
 @media (prefers-reduced-motion: reduce) {
     .nav-link,
     .sweep-link,
@@ -886,14 +843,16 @@ body > * {
     .footer-link,
     .scroll-cue,
     .menu-toggle,
-    .nav-link::before,
-    .sweep-link::before,
-    .section-card::before,
-    .project-tile::before,
-    .footer-link::before,
-    .scroll-cue::before,
-    .menu-toggle::before,
+    .section-card h2,
+    .section-card p,
+    .section-card .card-arrow,
+    .section-card .card-number,
+    .project-tile h3,
+    .project-tile p,
+    .menu-toggle span,
     .main-nav {
         transition: none !important;
+        animation: none !important;
+        will-change: auto;
     }
 }
