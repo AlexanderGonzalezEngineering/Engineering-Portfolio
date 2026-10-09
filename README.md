@@ -1,27 +1,35 @@
-# Engineering Portfolio — GitHub Pages Starter
+# Engineering Portfolio — Charcoal + Gold
 
-A responsive dark-theme engineering portfolio built with HTML, CSS, and vanilla JavaScript. No build tools or paid hosting required.
+This is a static website for GitHub Pages. No build tools are required.
 
-## Publish it on GitHub (browser-only)
+## Pages
+- `index.html` — homepage and Projects grid
+- `project.html` — brochure-style project overview (generated from `projects.js`)
+- `about.html` — My Background introduction page
+- `future.html` — reserved third page
+- `style.css` — all colors, fonts, layout, and responsive styling
+- `projects.js` — edit the sample projects here
+- `script.js` — renders project cards, project pages, and mobile navigation
+- `assets/` — project illustrations and images
 
-1. Create a **public** repository named `YOUR-GITHUB-USERNAME.github.io` (replace with your actual GitHub username).
-2. Download and **unzip** the supplied portfolio ZIP.
-3. In your repository, choose **Add file → Upload files**. Upload the **contents** of the unzipped `engineering-portfolio` folder, including `index.html`, `style.css`, `script.js`, `projects.js`, `project.html`, and the `assets` folder. **Do not upload the outer folder itself**: `index.html` must be at the repository root.
-4. Click **Commit changes**.
-5. Open **Settings → Pages**. Under **Build and deployment**, choose **Deploy from a branch**, branch **main**, folder **/(root)**, and click **Save**.
-6. Wait for publishing, then visit `https://YOUR-GITHUB-USERNAME.github.io`.
+## Changing colors
+At the top of `style.css`, change:
+- `--bg` for charcoal background (`#242424`)
+- `--accent` for matte gold (`#e5a83b`)
+- `--text` for readable light body text
 
-## Customize it
+## Editing your projects
+Open `projects.js`. Each project has a `slug`, `title`, `subtitle`,
+`image`, `overview`, `challenge`, `approach`, and `results`.
+Replace the sample text and SVG illustrations with your own real work.
+Project cards link to `project.html?slug=...` automatically.
 
-- In `index.html`, replace **Your Name**, **YN**, introduction, about section, email (`you@example.com`), GitHub and LinkedIn URLs, and the sample skills.
-- In `projects.js`, edit the project objects to add your actual titles, categories, engineering process, outcomes, and tools. Each item automatically becomes a card and a full project page.
-- Add your own photos/renders to `assets/` and update the `image` paths in `projects.js`.
-- Replace `assets/resume-placeholder.txt` with `assets/resume.pdf` and change the résumé link in `index.html` to `assets/resume.pdf`.
-- In `style.css`, edit `--accent` to change the lime highlight color.
-- `project.html?slug=thermal-system` is a working example of a case-study page.
+## Editing your background
+Open `about.html` and replace the placeholder paragraphs.
 
-## Important
+## Publishing on GitHub Pages
+Upload all files and the `assets` folder into your GitHub Pages repository.
+In Settings > Pages, choose Deploy from a branch, `main`, `/ (root)`.
+Your site should be at https://YOURUSERNAME.github.io.
 
-The three sample projects and their illustrations are **fictional placeholders**. Replace them with real work before using the site for applications. The illustrations are SVG graphics, not actual CAD or simulation results.
-
-Fonts load from Google Fonts when online; local fallback fonts work without it. This website is static and works with GitHub Pages.
+All source files are deliberately separated and editable.
