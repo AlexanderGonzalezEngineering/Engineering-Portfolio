@@ -1166,3 +1166,32 @@ body > * {
 .story-panel > p:last-child {
     margin-bottom: 0;
 }
+
+
+/* DEVELOPMENT FLOW — pronounced matte-gold arrows (v10)
+   Arrows are inline SVG for consistent thickness across computers.
+   Size increases in proportion to the heading font; vertical alignment
+   stays centered, with adjusted gaps on smaller screens. */
+.hero-descriptor .flow-arrow {
+    display: inline-block;
+    width: 1.65em;
+    height: 1.65em;
+    vertical-align: -0.48em;
+    margin: 0 0.6em;
+    overflow: visible;
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 2.65;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+    .hero-descriptor .flow-arrow {
+        width: 1.55em;
+        height: 1.55em;
+        vertical-align: -0.44em;
+        margin: 0 0.28em;
+    }
+}
